@@ -1,0 +1,147 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  CodeRAG - Serverless RAG server for project code knowledge base.
+  Uses Mistral Codestral Embed + LanceDB on S3.
+
+Parameters:
+  MistralApiKey:
+    Type: String
+    NoEcho: true
+    Description: Mistral AI API key for Codestral Embed
+  Stage:
+    Type: String
+    Default: dev
+    AllowedValues:
+      - dev
+      - prod
+
+Globals:
+  Function:
+    MemorySize: 1024
+    Timeout: 60
+    Tracing: Active
+    Architectures:
+      - x86_64
+    Environment:
+      Variables:
+        MISTRAL_API_KEY: !Ref MistralApiKey
+        LANCEDB_PATH: "s3+ddb://lancedb-tables"
+        STAGE: !Ref Stage
+
+Resources:
+  # S3 bucket for source code files and LanceDB storage
+  CodeSourceBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketEncryption:
+        ServerSideEncryptionConfiguration:
+          - ServerSideEncryptionByDefault:
+              SSEAlgorithm: AES256
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: true
+        BlockPublicPolicy: true
+        IgnorePublicAcls: true
+        RestrictPublicBuckets: true
+      LifecycleConfiguration:
+        Rules:
+          - Id: CleanupIncompleteUploads
+            Status: Enabled
+            AbortIncompleteMultipartUpload:
+              DaysAfterInitiation: 7
+
+  # DynamoDB table for LanceDB metadata (required by lancedb S3+DDB backend)
+  LanceDbMetadataTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: !Sub "coderag-lancedb-${Stage}"
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: base_uri
+          AttributeType: S
+        - AttributeName: version
+          AttributeType: N
+      KeySchema:
+        - AttributeName: base_uri
+          KeyType: HASH
+        - AttributeName: version
+          KeyType: RANGE
+
+  # API Gateway
+  CodeRagApi:
+    Type: AWS::Serverless::Api
+    Properties:
+      StageName: !Ref Stage
+      EndpointConfiguration: REGIONAL
+      TracingEnabled: true
+
+  # Ingest Lambda - processes code files from S3, embeds, stores in LanceDB
+  IngestFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      PackageType: Image
+      Description: Ingests code files from S3, chunks, embeds via Mistral, stores in LanceDB
+      Timeout: 300
+      MemorySize: 2048
+      Environment:
+        Variables:
+          LANCEDB_BUCKET: !Ref CodeSourceBucket
+      Policies:
+        - S3ReadPolicy:
+            BucketName: !Ref CodeSourceBucket
+        - S3CrudPolicy:
+            BucketName: !Ref CodeSourceBucket
+        - DynamoDBCrudPolicy:
+            TableName: !Ref LanceDbMetadataTable
+      Events:
+        ApiTrigger:
+          Type: Api
+          Properties:
+            Path: /ingest
+            Method: POST
+            RestApiId: !Ref CodeRagApi
+    Metadata:
+      Dockerfile: Dockerfile
+      DockerContext: ./infrastructure/lambda/ingest
+      DockerTag: latest
+
+  # Query Lambda - searches LanceDB for relevant code chunks
+  QueryFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      PackageType: Image
+      Description: Accepts a question, embeds via Mistral, searches LanceDB, returns relevant code
+      Timeout: 30
+      Environment:
+        Variables:
+          LANCEDB_BUCKET: !Ref CodeSourceBucket
+      Policies:
+        - S3ReadPolicy:
+            BucketName: !Ref CodeSourceBucket
+        - DynamoDBReadPolicy:
+            TableName: !Ref LanceDbMetadataTable
+      Events:
+        QueryApi:
+          Type: Api
+          Properties:
+            Path: /query
+            Method: POST
+            RestApiId: !Ref CodeRagApi
+    Metadata:
+      Dockerfile: Dockerfile
+      DockerContext: ./infrastructure/lambda/query
+      DockerTag: latest
+
+Outputs:
+  ApiUrl:
+    Description: API Gateway endpoint URL
+    Value: !Sub "https://${CodeRagApi}.execute-api.${AWS::Region}.amazonaws.com/${Stage}/"
+  CodeSourceBucketName:
+    Description: S3 bucket for uploading source code
+    Value: !Ref CodeSourceBucket
+  IngestFunctionArn:
+    Description: Ingest Lambda ARN
+    Value: !GetAtt IngestFunction.Arn
+  QueryFunctionArn:
+    Description: Query Lambda ARN
+    Value: !GetAtt QueryFunction.Arn

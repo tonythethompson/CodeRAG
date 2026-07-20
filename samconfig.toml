@@ -1,0 +1,16 @@
+# SAM deploy configuration
+# Run: sam deploy --guided (first time) to populate these values
+
+version = 0.1
+
+[default.deploy.parameters]
+stack_name = "coderag"
+resolve_s3 = true
+capabilities = "CAPABILITY_IAM"
+confirm_changeset = true
+s3_prefix = "coderag"
+parameter_overrides = "Stage=\"dev\""
+image_repositories = ["IngestFunction=254587346070.dkr.ecr.us-east-1.amazonaws.com/coderag4630fb70/ingestfunction3c3588cfrepo", "QueryFunction=254587346070.dkr.ecr.us-east-1.amazonaws.com/coderag4630fb70/queryfunction87654789repo"]
+
+[default.global.parameters]
+region = "us-east-1"

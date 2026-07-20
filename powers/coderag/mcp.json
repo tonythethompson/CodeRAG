@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "coderag": {
+      "command": "python",
+      "args": ["server.py"],
+      "cwd": "mcp-server",
+      "env": {
+        "CODERAG_API_URL": "${CODERAG_API_URL}"
+      }
+    }
+  }
+}
