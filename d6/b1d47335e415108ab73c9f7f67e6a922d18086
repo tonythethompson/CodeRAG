@@ -1,0 +1,21 @@
+powers/coderag/POWER.md
+  s_4cf0edde39c7ec::t_aaecb727a8d490 1-125
+powers/coderag/steering/infrastructure-setup.md
+  s_4cf0edde39c7ec::t_5d1a5b5c6df706 1-66
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.14",
+  "base_commit_sha": "d6b1d47335e415108ab73c9f7f67e6a922d18086",
+  "prompts": {},
+  "sessions": {
+    "s_4cf0edde39c7ec": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "5c3eb6e8-a113-4663-b18c-871a08fd14ee",
+        "model": "default"
+      },
+      "human_author": "tonythethompson <github@trackdub.com>"
+    }
+  }
+}
