@@ -1,0 +1,18 @@
+Building codeuri: D:\Dev\CodeRAG\infrastructure\lambda\ingest runtime: python3.13 architecture: x86_64 functions: IngestFunction
+ Running PythonPipBuilder:ResolveDependencies
+ Running PythonPipBuilder:CopySource
+Building codeuri: D:\Dev\CodeRAG\infrastructure\lambda\query runtime: python3.13 architecture: x86_64 functions: QueryFunction
+ Running PythonPipBuilder:ResolveDependencies
+ Running PythonPipBuilder:CopySource
+
+Build Succeeded
+
+Built Artifacts  : ..\CodeRAG\.aws-sam\build
+Built Template   : ..\CodeRAG\.aws-sam\build\template.yaml
+
+Commands you can use next
+=========================
+[*] Validate SAM template: sam validate
+[*] Invoke Function: sam local invoke -t ..\CodeRAG\.aws-sam\build\template.yaml
+[*] Test Function in the Cloud: sam sync --stack-name {{stack-name}} --watch
+[*] Deploy: sam deploy --guided --template-file ..\CodeRAG\.aws-sam\build\template.yaml

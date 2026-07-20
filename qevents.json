@@ -1,0 +1,41 @@
+﻿{
+    "events": [
+        {
+            "timestamp": 1784536761036,
+            "message": "INIT_REPORT Init Duration: 9999.34 ms\tPhase: init\tStatus: timeout\n",
+            "ingestionTime": 1784536761344
+        },
+        {
+            "timestamp": 1784536774941,
+            "message": "START RequestId: 953c9cfd-1d5c-416c-9e9a-d675125a6e6d Version: $LATEST\n",
+            "ingestionTime": 1784536783964
+        },
+        {
+            "timestamp": 1784536774942,
+            "message": "[INFO]\t2026-07-20T08:39:34.942Z\t953c9cfd-1d5c-416c-9e9a-d675125a6e6d\tQuery: 'How does the dubbing pipeline work?' (top_k=5)\n",
+            "ingestionTime": 1784536783964
+        },
+        {
+            "timestamp": 1784536775226,
+            "message": "[INFO]\t2026-07-20T08:39:35.226Z\t953c9cfd-1d5c-416c-9e9a-d675125a6e6d\tHTTP Request: POST https://api.mistral.ai/v1/embeddings \"HTTP/1.1 200 OK\"\n",
+            "ingestionTime": 1784536783964
+        },
+        {
+            "timestamp": 1784536781763,
+            "message": "[WARNING]\t2026-07-20T08:39:41.763Z\t953c9cfd-1d5c-416c-9e9a-d675125a6e6d\tTable 'code_chunks' not found - run ingestion first\n",
+            "ingestionTime": 1784536783964
+        },
+        {
+            "timestamp": 1784536782202,
+            "message": "END RequestId: 953c9cfd-1d5c-416c-9e9a-d675125a6e6d\n",
+            "ingestionTime": 1784536783964
+        },
+        {
+            "timestamp": 1784536782202,
+            "message": "REPORT RequestId: 953c9cfd-1d5c-416c-9e9a-d675125a6e6d\tDuration: 21009.22 ms\tBilled Duration: 21010 ms\tMemory Size: 1024 MB\tMax Memory Used: 237 MB\t\nXRAY TraceId: 1-6a5ddeae-60f3b9ae15a69fdb15225a3d\tSegmentId: 86ef3d507165e13f\tSampled: true\t\n",
+            "ingestionTime": 1784536783964
+        }
+    ],
+    "nextForwardToken": "f/39796500077292539881711439693107218233512340107630411781/s",
+    "nextBackwardToken": "b/39796499605274967009612270252016356036424563130240204800/s"
+}

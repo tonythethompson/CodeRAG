@@ -1,0 +1,266 @@
+{
+    "events": [
+        {
+            "timestamp": 1784535316899,
+            "message": "[INFO]\t2026-07-20T08:15:16.899Z\t\tFound credentials in environment variables.\n",
+            "ingestionTime": 1784535320699
+        },
+        {
+            "timestamp": 1784535317126,
+            "message": "START RequestId: 6ae1e7bc-566d-4ddf-b6ec-19e2fa617d47 Version: $LATEST\n",
+            "ingestionTime": 1784535320699
+        },
+        {
+            "timestamp": 1784535317555,
+            "message": "[INFO]\t2026-07-20T08:15:17.555Z\t6ae1e7bc-566d-4ddf-b6ec-19e2fa617d47\tChunked source/DubBench/App.axaml into 1 chunks\n",
+            "ingestionTime": 1784535320699
+        },
+        {
+            "timestamp": 1784535317857,
+            "message": "[INFO]\t2026-07-20T08:15:17.857Z\t6ae1e7bc-566d-4ddf-b6ec-19e2fa617d47\tHTTP Request: POST https://api.mistral.ai/v1/embeddings \"HTTP/1.1 200 OK\"\n",
+            "ingestionTime": 1784535320699
+        },
+        {
+            "timestamp": 1784535318237,
+            "message": "[ERROR] RuntimeError: Arrow error: C Data interface error: Invalid: Vector column 'vector' has variable length vectors. Set on_bad_vectors='drop' to remove them, set on_bad_vectors='fill' and fill_value=<value> to replace them, or set on_bad_vectors='null' to replace them with null.. Detail: Python exception: Traceback (most recent call last):\n",
+            "ingestionTime": 1784535320699
+        },
+        {
+            "timestamp": 1784535318237,
+            "message": "File \"/var/lang/lib/python3.13/site-packages/lancedb/table.py\", line 425, in gen\n",
+            "ingestionTime": 1784535320699
+        },
+        {
+            "timestamp": 1784535318237,
+            "message": "for batch in reader:\n",
+            "ingestionTime": 1784535320699
+        },
+        {
+            "timestamp": 1784535318237,
+            "message": "^^^^^^\n",
+            "ingestionTime": 1784535320699
+        },
+        {
+            "timestamp": 1784535318237,
+            "message": "File \"pyarrow/ipc.pxi\", line 671, in pyarrow.lib.RecordBatchReader.__next__\n",
+            "ingestionTime": 1784535320699
+        },
+        {
+            "timestamp": 1784535318237,
+            "message": "File \"pyarrow/ipc.pxi\", line 705, in pyarrow.lib.RecordBatchReader.read_next_batch\n",
+            "ingestionTime": 1784535320699
+        },
+        {
+            "timestamp": 1784535318237,
+            "message": "check_status(self.reader.get().ReadNext(&batch))\n",
+            "ingestionTime": 1784535320699
+        },
+        {
+            "timestamp": 1784535318237,
+            "message": "File \"pyarrow/error.pxi\", line 89, in pyarrow.lib.check_status\n",
+            "ingestionTime": 1784535320699
+        },
+        {
+            "timestamp": 1784535318237,
+            "message": "File \"/var/lang/lib/python3.13/site-packages/lancedb/table.py\", line 3831, in gen\n",
+            "ingestionTime": 1784535320699
+        },
+        {
+            "timestamp": 1784535318237,
+            "message": "batch = _handle_bad_vector_column(\n",
+            "ingestionTime": 1784535320699
+        },
+        {
+            "timestamp": 1784535318237,
+            "message": "batch,\n",
+            "ingestionTime": 1784535320699
+        },
+        {
+            "timestamp": 1784535318237,
+            "message": "...<4 lines>...\n",
+            "ingestionTime": 1784535320699
+        },
+        {
+            "timestamp": 1784535318237,
+            "message": "expected_value_type=vector_column[\"expected_value_type\"],\n",
+            "ingestionTime": 1784535320699
+        },
+        {
+            "timestamp": 1784535318237,
+            "message": ")\n",
+            "ingestionTime": 1784535320699
+        },
+        {
+            "timestamp": 1784535318237,
+            "message": "File \"/var/lang/lib/python3.13/site-packages/lancedb/table.py\", line 4031, in _handle_bad_vector_column\n",
+            "ingestionTime": 1784535320699
+        },
+        {
+            "timestamp": 1784535318237,
+            "message": "raise ValueError(\n",
+            "ingestionTime": 1784535320699
+        },
+        {
+            "timestamp": 1784535318237,
+            "message": "...<4 lines>...\n",
+            "ingestionTime": 1784535320699
+        },
+        {
+            "timestamp": 1784535318237,
+            "message": ")\n",
+            "ingestionTime": 1784535320699
+        },
+        {
+            "timestamp": 1784535318237,
+            "message": "ValueError: Vector column 'vector' has variable length vectors. Set on_bad_vectors='drop' to remove them, set on_bad_vectors='fill' and fill_value=<value> to replace them, or set on_bad_vectors='null' to replace them with null.\n",
+            "ingestionTime": 1784535320699
+        },
+        {
+            "timestamp": 1784535318237,
+            "message": "Traceback (most recent call last):\rááFile \"/var/task/app.py\", line 322, in lambda_handler\ráááátotal_chunks += ingest_chunks(chunks)\rááFile \"/var/task/app.py\", line 273, in ingest_chunks\ráááátable = db.create_table(TABLE_NAME, data=records, schema=schema)\rááFile \"/var/lang/lib/python3.13/site-packages/lancedb/db.py\", line 935, in create_table\ráááátbl = LanceTable.create(\rááFile \"/var/lang/lib/python3.13/site-packages/lancedb/table.py\", line 3455, in create\rááááself._table = LOOP.run(\rááFile \"/var/lang/lib/python3.13/site-packages/lancedb/background_loop.py\", line 33, in run\rááááreturn concurrent_future.result()\rááFile \"/var/lang/lib/python3.13/concurrent/futures/_base.py\", line 460, in result\rááááreturn self.__get_result()\rááFile \"/var/lang/lib/python3.13/concurrent/futures/_base.py\", line 402, in __get_result\rááááraise self._exception\rááFile \"/var/lang/lib/python3.13/site-packages/lancedb/db.py\", line 1648, in create_table\ráááánew_table = await self._inner.create_table(\n",
+            "ingestionTime": 1784535320699
+        },
+        {
+            "timestamp": 1784535318240,
+            "message": "END RequestId: 6ae1e7bc-566d-4ddf-b6ec-19e2fa617d47\n",
+            "ingestionTime": 1784535320699
+        },
+        {
+            "timestamp": 1784535318240,
+            "message": "REPORT RequestId: 6ae1e7bc-566d-4ddf-b6ec-19e2fa617d47\tDuration: 1113.60 ms\tBilled Duration: 4493 ms\tMemory Size: 2048 MB\tMax Memory Used: 278 MB\tInit Duration: 3379.28 ms\t\nXRAY TraceId: 1-6a5dd911-5fb39e857004b3d94ff6bf0d\tSegmentId: 39c94ec932e3b96f\tSampled: true\t\n",
+            "ingestionTime": 1784535320699
+        },
+        {
+            "timestamp": 1784535362934,
+            "message": "START RequestId: 37957fc9-7a4e-4d1b-8f26-a2e7d71e2589 Version: $LATEST\n",
+            "ingestionTime": 1784535371957
+        },
+        {
+            "timestamp": 1784535363482,
+            "message": "[INFO]\t2026-07-20T08:16:03.482Z\t37957fc9-7a4e-4d1b-8f26-a2e7d71e2589\tChunked source/DubBench/App.axaml into 1 chunks\n",
+            "ingestionTime": 1784535371957
+        },
+        {
+            "timestamp": 1784535363779,
+            "message": "[INFO]\t2026-07-20T08:16:03.779Z\t37957fc9-7a4e-4d1b-8f26-a2e7d71e2589\tHTTP Request: POST https://api.mistral.ai/v1/embeddings \"HTTP/1.1 200 OK\"\n",
+            "ingestionTime": 1784535371957
+        },
+        {
+            "timestamp": 1784535363983,
+            "message": "[ERROR] RuntimeError: Arrow error: C Data interface error: Invalid: Vector column 'vector' has variable length vectors. Set on_bad_vectors='drop' to remove them, set on_bad_vectors='fill' and fill_value=<value> to replace them, or set on_bad_vectors='null' to replace them with null.. Detail: Python exception: Traceback (most recent call last):\n",
+            "ingestionTime": 1784535371957
+        },
+        {
+            "timestamp": 1784535363983,
+            "message": "File \"/var/lang/lib/python3.13/site-packages/lancedb/table.py\", line 425, in gen\n",
+            "ingestionTime": 1784535371957
+        },
+        {
+            "timestamp": 1784535363983,
+            "message": "for batch in reader:\n",
+            "ingestionTime": 1784535371957
+        },
+        {
+            "timestamp": 1784535363983,
+            "message": "^^^^^^\n",
+            "ingestionTime": 1784535371957
+        },
+        {
+            "timestamp": 1784535363983,
+            "message": "File \"pyarrow/ipc.pxi\", line 671, in pyarrow.lib.RecordBatchReader.__next__\n",
+            "ingestionTime": 1784535371957
+        },
+        {
+            "timestamp": 1784535363983,
+            "message": "return self.read_next_batch()\n",
+            "ingestionTime": 1784535371957
+        },
+        {
+            "timestamp": 1784535363983,
+            "message": "File \"pyarrow/ipc.pxi\", line 705, in pyarrow.lib.RecordBatchReader.read_next_batch\n",
+            "ingestionTime": 1784535371957
+        },
+        {
+            "timestamp": 1784535363983,
+            "message": "check_status(self.reader.get().ReadNext(&batch))\n",
+            "ingestionTime": 1784535371957
+        },
+        {
+            "timestamp": 1784535363983,
+            "message": "File \"pyarrow/error.pxi\", line 89, in pyarrow.lib.check_status\n",
+            "ingestionTime": 1784535371957
+        },
+        {
+            "timestamp": 1784535363983,
+            "message": "File \"/var/lang/lib/python3.13/site-packages/lancedb/table.py\", line 3831, in gen\n",
+            "ingestionTime": 1784535371957
+        },
+        {
+            "timestamp": 1784535363983,
+            "message": "batch = _handle_bad_vector_column(\n",
+            "ingestionTime": 1784535371957
+        },
+        {
+            "timestamp": 1784535363983,
+            "message": "batch,\n",
+            "ingestionTime": 1784535371957
+        },
+        {
+            "timestamp": 1784535363983,
+            "message": "...<4 lines>...\n",
+            "ingestionTime": 1784535371957
+        },
+        {
+            "timestamp": 1784535363983,
+            "message": "expected_value_type=vector_column[\"expected_value_type\"],\n",
+            "ingestionTime": 1784535371957
+        },
+        {
+            "timestamp": 1784535363983,
+            "message": ")\n",
+            "ingestionTime": 1784535371957
+        },
+        {
+            "timestamp": 1784535363983,
+            "message": "File \"/var/lang/lib/python3.13/site-packages/lancedb/table.py\", line 4031, in _handle_bad_vector_column\n",
+            "ingestionTime": 1784535371957
+        },
+        {
+            "timestamp": 1784535363983,
+            "message": "raise ValueError(\n",
+            "ingestionTime": 1784535371957
+        },
+        {
+            "timestamp": 1784535363983,
+            "message": "...<4 lines>...\n",
+            "ingestionTime": 1784535371957
+        },
+        {
+            "timestamp": 1784535363983,
+            "message": ")\n",
+            "ingestionTime": 1784535371957
+        },
+        {
+            "timestamp": 1784535363983,
+            "message": "ValueError: Vector column 'vector' has variable length vectors. Set on_bad_vectors='drop' to remove them, set on_bad_vectors='fill' and fill_value=<value> to replace them, or set on_bad_vectors='null' to replace them with null.\n",
+            "ingestionTime": 1784535371957
+        },
+        {
+            "timestamp": 1784535363983,
+            "message": "Traceback (most recent call last):\rááFile \"/var/task/app.py\", line 322, in lambda_handler\ráááátotal_chunks += ingest_chunks(chunks)\rááFile \"/var/task/app.py\", line 273, in ingest_chunks\ráááátable = db.create_table(TABLE_NAME, data=records, schema=schema)\rááFile \"/var/lang/lib/python3.13/site-packages/lancedb/db.py\", line 935, in create_table\ráááátbl = LanceTable.create(\rááFile \"/var/lang/lib/python3.13/site-packages/lancedb/table.py\", line 3455, in create\rááááself._table = LOOP.run(\rááFile \"/var/lang/lib/python3.13/site-packages/lancedb/background_loop.py\", line 33, in run\rááááreturn concurrent_future.result()\rááFile \"/var/lang/lib/python3.13/concurrent/futures/_base.py\", line 460, in result\rááááreturn self.__get_result()\rááFile \"/var/lang/lib/python3.13/concurrent/futures/_base.py\", line 402, in __get_result\rááááraise self._exception\rááFile \"/var/lang/lib/python3.13/site-packages/lancedb/db.py\", line 1648, in create_table\ráááánew_table = await self._inner.create_table(\n",
+            "ingestionTime": 1784535371957
+        },
+        {
+            "timestamp": 1784535363985,
+            "message": "END RequestId: 37957fc9-7a4e-4d1b-8f26-a2e7d71e2589\n",
+            "ingestionTime": 1784535371957
+        },
+        {
+            "timestamp": 1784535363985,
+            "message": "REPORT RequestId: 37957fc9-7a4e-4d1b-8f26-a2e7d71e2589\tDuration: 1050.33 ms\tBilled Duration: 1051 ms\tMemory Size: 2048 MB\tMax Memory Used: 282 MB\t\nXRAY TraceId: 1-6a5dd942-3519817613be77a418764489\tSegmentId: b4511e1f2412c932\tSampled: true\t\n",
+            "ingestionTime": 1784535371957
+        }
+    ],
+    "nextForwardToken": "f/39796468449996586657206678066733406427350928594760237081/s",
+    "nextBackwardToken": "b/39796467399943698239193756762415707567079940544770605056/s"
+}

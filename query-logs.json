@@ -1,0 +1,14 @@
+{
+    "logStreams": [
+        {
+            "logStreamName": "2026/07/20/[$LATEST]cb660985e8fd498c892ebe5eca8590ba",
+            "creationTime": 1784536761334,
+            "firstEventTimestamp": 1784536761036,
+            "lastEventTimestamp": 1784536761036,
+            "lastIngestionTime": 1784536761344,
+            "uploadSequenceToken": "49039859679764666153256977601112559620105639002790376415",
+            "arn": "arn:aws:logs:us-east-1:254587346070:log-group:/aws/lambda/coderag-QueryFunction-mmwkIGSMW5bz:log-stream:2026/07/20/[$LATEST]cb660985e8fd498c892ebe5eca8590ba",
+            "storedBytes": 0
+        }
+    ]
+}

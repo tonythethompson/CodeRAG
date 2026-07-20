@@ -1,0 +1,2 @@
+
+aws: [ERROR]: An error occurred (InvalidParameterException) when calling the FilterLogEvents operation: 1 validation error detected: Value at 'logGroupName' failed to satisfy constraint: Member must satisfy regular expression pattern: [\.\-_/#A-Za-z0-9]+
